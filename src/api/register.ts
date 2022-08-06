@@ -1,0 +1,41 @@
+import {UmiApiRequest, UmiApiResponse} from "umi";
+import {PrismaClient} from "@prisma/client";
+import bcrypt from "bcryptjs";
+import {signToken} from "@/utils/jwt";
+
+export default async function (req: UmiApiRequest, res: UmiApiResponse) {
+  switch (req.method) {
+    case "POST":
+      // try {
+      const prisma = new PrismaClient();
+      const user = await prisma.user.create({
+        data: {
+          email: req.body.email,
+          passwordHash: bcrypt.hashSync(req.body.password, 8),
+          name: req.body.name,
+          avatarUrl: req.body.avatarUrl,
+        },
+      });
+
+      console.log(
+        "%c [  ]-21",
+        "font-size:13px; background:pink; color:#bf2c9f;",
+        user
+      );
+      res.status(200).json(user);
+      await prisma.$disconnect();
+      // } catch (e: any) {
+      //   res.status(500).json({
+      //     result: false,
+      //     message:
+      //       typeof e.code === "string"
+      //         ? "https://www.prisma.io/docs/reference/api-reference/error-reference#" +
+      //           e.code.toLowerCase()
+      //         : e,
+      //   });
+      // }
+      break;
+    default:
+      res.status(405).json({error: "Method not allowed"});
+  }
+}
