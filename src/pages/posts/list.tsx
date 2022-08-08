@@ -12,10 +12,11 @@ export default function HomePage() {
         console.error(await res.text());
       }
       setPosts(
-        (await res.json()).sort(
-          (p1: any, p2: any) =>
-            new Date(p2.createdAt).getTime() - new Date(p1.createdAt).getTime()
-        )
+        await res.json()
+        // (await res.json()).sort(
+        //   (p1: any, p2: any) =>
+        //     new Date(p2.createdAt).getTime() - new Date(p1.createdAt).getTime()
+        // )
       );
     } catch (err) {
       console.error(err);
