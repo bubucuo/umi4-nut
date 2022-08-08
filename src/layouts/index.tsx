@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 // @ts-ignore
 import {Link, Outlet} from "umi";
 
@@ -7,10 +7,29 @@ const menus = [
   {to: "/posts/list", title: "博客列表"},
   {to: "/posts/create", title: "新建博客"},
   {to: "/register", title: "注册新用户"},
-  {to: "/login", title: "登录"},
+  // {to: "/login", title: "登录"},
 ];
 
 export default function Layout() {
+  const [user, setUser] = useState<any>();
+
+  async function refresh() {
+    try {
+      const res = await fetch("/api/user");
+      const json = await res.json();
+
+      if (res.status === 200) {
+        setUser(json);
+      } else {
+        setUser(null);
+      }
+    } catch (err) {}
+  }
+
+  useEffect(() => {
+    refresh();
+  }, []);
+
   return (
     <div className="relative">
       <div className="flex">
@@ -19,6 +38,14 @@ export default function Layout() {
             {menu.title}
           </Link>
         ))}
+
+        {user ? (
+          <div className="p-10  hover:shadow-xl ">{user.name}</div>
+        ) : (
+          <Link to={"/login"} className="p-10  hover:shadow-xl ">
+            登录
+          </Link>
+        )}
       </div>
 
       <div

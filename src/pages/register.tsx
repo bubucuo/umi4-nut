@@ -22,7 +22,7 @@ export default function () {
         return;
       }
       const data = await res.json();
-      alert(`欢迎回来，${data.name}`);
+      alert(`注册成功，${data.name}`);
       history.push("/posts/create");
     } catch (err) {
       console.error(err);

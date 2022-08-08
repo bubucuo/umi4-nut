@@ -12,7 +12,7 @@ export default async function (req: UmiApiRequest, res: UmiApiResponse) {
         data: {
           email: req.body.email,
           passwordHash: bcrypt.hashSync(req.body.password, 8),
-          name: req.body.name,
+          name: req.body.name || req.body.email,
           avatarUrl: req.body.avatarUrl,
         },
       });
