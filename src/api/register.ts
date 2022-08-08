@@ -17,11 +17,6 @@ export default async function (req: UmiApiRequest, res: UmiApiResponse) {
         },
       });
 
-      console.log(
-        "%c [  ]-21",
-        "font-size:13px; background:pink; color:#bf2c9f;",
-        user
-      );
       res.status(200).json(user);
       await prisma.$disconnect();
       // } catch (e: any) {

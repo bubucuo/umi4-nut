@@ -2,9 +2,25 @@ import React from "react";
 // @ts-ignore
 import {Link, Outlet} from "umi";
 
+const menus = [
+  {to: "/", title: "首页"},
+  {to: "/posts/list", title: "博客列表"},
+  {to: "/posts/create", title: "新建博客"},
+  {to: "/register", title: "注册新用户"},
+  {to: "/login", title: "登录"},
+];
+
 export default function Layout() {
   return (
     <div className="relative">
+      <div className="flex">
+        {menus.map((menu) => (
+          <Link key={menu.to} to={menu.to} className="p-10  hover:shadow-xl ">
+            {menu.title}
+          </Link>
+        ))}
+      </div>
+
       <div
         className="fixed w-72 bottom-8 right-8 py-4 z-50 flex transition-all
         justify-end flex-col p-4 bg-white shadow hover:shadow-xl rounded">
@@ -15,13 +31,6 @@ export default function Layout() {
           <a href="https://www.prisma.io/">Prisma </a>+
           <a href="https://tailwindcss.com/">Tailwindcss</a> <br />
           并且部署在 <a href="https://vercel.com/">Vercel</a> 的一个示例！
-        </p>
-        <p className="text-right mt-2">
-          <a
-            className="text-xs"
-            href="https://next.umijs.org/zh-CN/docs/tutorials/blog">
-            马上自己做一个 ➡️
-          </a>
         </p>
       </div>
       <Outlet />
