@@ -37,13 +37,13 @@ export default function PostPage() {
       )}
       {post && (
         <>
-          <div className="w-full lg:h-[46rem] h-[36rem] overflow-hidden relative flex justify-center">
+          <div className="w-full lg:h-[26rem] h-[16rem] overflow-hidden relative flex justify-center">
             <img
               src={post.imageUrl}
-              className="absolute top-0 w-full h-full object-cover"
+              className="absolute top-0 h-full object-cover"
               alt=""
             />
-            <div className="w-full h-full absolute top-0 right-0 bg-black bg-opacity-60" />
+            <div className="w-full h-full absolute top-0 right-0" />
             <div className="w-full absolute lg:bottom-24 bottom-12 container lg:px-64 px-8">
               <p className="text-white text-4xl font-extrabold">{post.title}</p>
               <div className="flex flex-row mt-8 align-bottom">
