@@ -46,7 +46,7 @@ export default function HomePage() {
                 <img
                   src={post.imageUrl}
                   alt=""
-                  className="absolute top-0 w-full h-full"
+                  className="absolute top-0 w-full"
                 />
                 <div
                   className="absolute top-0 w-full h-full bg-black opacity-10
