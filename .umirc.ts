@@ -1,38 +1,34 @@
-export default {
-  npmClient: "pnpm",
-  apiRoute: {
-    platform: "vercel",
+import { defineConfig } from '@umijs/max';
+
+export default defineConfig({
+  antd: {},
+  access: {},
+  model: {},
+  initialState: {},
+  request: {},
+  layout: {
+    title: '@umijs/max',
   },
-
-  // routes: [
-  //   {
-  //     path: "/",
-  //     component: "@/layouts/index",
   routes: [
-    {exact: true, path: "/", component: "index"},
     {
-      exact: true,
-      path: "/posts/create",
-      component: "posts/create",
-      wrappers: ["@/wrappers/auth"],
+      path: '/',
+      redirect: '/home',
     },
-    {exact: true, path: "/posts/:postId", component: "posts/post"},
-    {exact: true, path: "/posts/list", component: "posts/list"},
     {
-      exact: true,
-      path: "/user",
-      component: "user/user",
-      wrappers: ["@/wrappers/auth"],
+      name: '首页',
+      path: '/home',
+      component: './Home',
     },
-
-    {exact: true, path: "/login", component: "user/login"},
-    {exact: true, path: "/user/register", component: "user/register"},
-
-    {path: "*", component: "_404"},
+    {
+      name: '权限演示',
+      path: '/access',
+      component: './Access',
+    },
+    {
+      name: ' CRUD 示例',
+      path: '/table',
+      component: './Table',
+    },
   ],
-  // },
-  // ],
-
-  plugins: [require.resolve("@umijs/plugins/dist/tailwindcss")],
-  tailwindcss: {},
-};
+  npmClient: 'pnpm',
+});
