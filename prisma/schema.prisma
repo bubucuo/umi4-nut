@@ -10,13 +10,13 @@ datasource db {
   shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
 }
 
-model Post {
+model post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title     String   @db.VarChar(255)
   content   String?
-  author    User     @relation(fields: [authorId], references: [id])
+  author    user     @relation(fields: [authorId], references: [id])
   authorId  Int
   imageUrl  String?
   tags      String
@@ -24,11 +24,11 @@ model Post {
   @@index(authorId)
 }
 
-model User {
+model user {
   id           Int     @id @default(autoincrement())
   email        String  @unique
   passwordHash String
   name         String?
-  posts        Post[]
+  posts        post[]
   avatarUrl    String?
 }
